@@ -6,9 +6,10 @@ class Individual {
      this.fitness = 0; // fitness do inviduo
      this.move = true; // pode mover-se ?
      this.alfa = 1; // modificador extra do fitness
+     this.allAcc = []
   }
   calcFit() {
-    /* calculo do fitness feito a partir da distância do individuo na sua posição e o objetivo , sendo possivel 
+    /* calculo do fitness feito a partir da distância do individuo na sua posição e o objetivo , sendo possivel
     modifica-lo a partir de um valor alfa que tem como valor padrão 1 mas pode assumir valores .5 e 2*/
     let par1 = (this.pos.x-goal.x)*(this.pos.x-goal.x);
     let par2 = (this.pos.y-goal.y)*(this.pos.y-goal.y);
@@ -23,6 +24,7 @@ class Individual {
       this.vel.y += this.acc[framesDrawn].y; // faz o incremento na velocidade do individuo, a partir dos números armazenados no dna, no eixo y
       this.pos.x += this.vel.x; // aplica a movimentação no objeto, no eixo x
       this.pos.y += this.vel.y; // aplica a movimentação no objeto, no eixo y
+      this.allAcc.push({x: this.pos.x, y: this.pos.y})
 
       // teste para saber se o individuo saiu do canvas
       if(this.pos.x < 0 || this.pos.y < 0 || this.pos.x > canvas.width || this.pos.y > canvas.height){
@@ -43,6 +45,9 @@ class Individual {
         this.move = false;
         this.alfa = 2; // modifica alfa, e assim aumenta o fitness desse individuo
         teste = true;
+        if(!objetoVencedor){
+          objetoVencedor = this;
+        }
       }
     }
   }

@@ -12,7 +12,7 @@ const goal = {x:canvas.width-100, y:canvas.height/2};
 const tournamentParcipiants = 10;
 let genNumber = 1;
 var teste = false;
-
+var objetoVencedor = null
 
 // obsticle drawing
 let obsticleNum = 0;
@@ -23,9 +23,9 @@ canvas.addEventListener("mousedown", mouseDown);
 canvas.addEventListener("mouseup", mouseUp);
 canvas.addEventListener("mousemove", mouseMove);
 // Cenário Fácil gen : 2
-obsticleArr.push({startX:500, startY:500, w:500, h:500});
-obsticleArr.push({startX:500, startY:0, w:500, h:400});
-obsticleNum+=2;
+//obsticleArr.push({startX:500, startY:500, w:500, h:500});
+//obsticleArr.push({startX:500, startY:0, w:500, h:400});
+//obsticleNum+=2;
 // Cenário Médio gen : 31
 /*obsticleArr.push({startX:500, startY:500, w:30, h:canvas.height});
 obsticleArr.push({startX:600, startY:0, w:30, h:500});
@@ -33,8 +33,8 @@ obsticleNum+= 2;*/
 // Cenário Difícil gen : 44
 /*obsticleArr.push({startX:500, startY:500, w:30, h:canvas.height});
 obsticleArr.push({startX:700, startY:0, w:30, h:500});
-obsticleArr.push({startX:900, startY:300, w:30, h:300}); 
-obsticleArr.push({startX:1000, startY:300, w:30, h:300}); 
+obsticleArr.push({startX:900, startY:300, w:30, h:300});
+obsticleArr.push({startX:1000, startY:300, w:30, h:300});
 obsticleNum+= 4;*/
 
 
@@ -78,17 +78,31 @@ const draw = () => {
         obsticleArr.forEach( k => {ctx.fillRect(k.startX, k.startY, k.w, k.h);});  // drawing obsticles
         ctx.fillStyle = 'green';    // drawing goal
         ctx.fillRect(goal.x, goal.y, 20, 20);
+        //Draw lines
+        console.log(objetoVencedor)
+        let posInicial = [30, (canvas.height / 2)]
+        ctx.fillStyle = "yellow"
+        ctx.strokeStyle = "yellow"
+        ctx.beginPath()
+        ctx.moveTo(posInicial[0], posInicial[1])
+        for(let i in objetoVencedor.allAcc){
+          //posInicial[0] = posInicial[0] + objetoVencedor.allAcc[i].x
+          //posInicial[1] = posInicial[1] + objetoVencedor.allAcc[i].y
+          //ctx.lineTo(posInicial[0], posInicial[1])
+          ctx.lineTo(objetoVencedor.allAcc[i].x, objetoVencedor.allAcc[i].y)
+        }
+        ctx.stroke()
       }
       generation.forEach( indi => {  // drawing individuals
-    indi.drawI();
-  });
+        indi.drawI();
+      });
 }
 
 // troca de cromossomos
 const pairChromosomes = t1 => t2 => {
-  let ret = []; // array que vai receber o resultado 
-  for (let i = 0; i < dnaLength; i++) {  
-    if(Math.random() > 0.01){ // teste de mutação           
+  let ret = []; // array que vai receber o resultado
+  for (let i = 0; i < dnaLength; i++) {
+    if(Math.random() > 0.01){ // teste de mutação
       i<dnaLength/(dnaLength/4 + Math.random()*dnaLength/2)?ret.push(t1.acc[i]):ret.push(t2.acc[i]); // função randomica para determinar de qual pai será pego o i gene
     }else{
       ret.push(randomVel()); // aconteceu mutação (gera um valor randomico e atribui ao i gene)
@@ -108,7 +122,7 @@ const tournament = () => {
     }
     // seleciona os 2 melhores pais do torneio
     let parent1 = tournament.reduce((a, b) => a.calcFit()>b.calcFit()?a:b); // compara os pais e pega o de maior fitness
-    tournament.splice(tournament.indexOf(parent1), 1); // retira o pai selecionado do array 
+    tournament.splice(tournament.indexOf(parent1), 1); // retira o pai selecionado do array
     let parent2 = tournament.reduce((a, b) => a.calcFit()>b.calcFit()?a:b); // seleciona o segundo maior fitness
 
     // gera 2 filhos a partir dos 2 pais
@@ -163,6 +177,5 @@ const getDna = () => {
       for (let i = 0; i < genSize; i++) {
         generation.push(new Individual(getDna()));
       }
-      draw(); 
+      draw();
       requestAnimationFrame(step);
-  
