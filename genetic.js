@@ -65,14 +65,16 @@ function mouseMove(e) {
 
 // draw dos elmentos na tela - (obstaculos,objetivo e individuos)
 const draw = () => {
-      if(teste){
+      
         ctx.globalAlpha = 1;
         ctx.fillStyle = '#211f1f';                         // clear canvas
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = 'white';
         ctx.font = "30px Arial";
         ctx.fillText("generation: " + genNumber,canvas.width-250,canvas.height-50);
-        ctx.fillText("Time: " + (time_final-time_init)+"ms",20,canvas.height-50);
+        if(teste){
+          ctx.fillText("Time: " + (time_final-time_init)+"ms",20,canvas.height-50);
+        }
         ctx.fillStyle = '#a5551c';
         ctx.fillRect(rect.startX, rect.startY, rect.w, rect.h);  // drawing rect that is going to become obsticle
         obsticleArr.forEach( k => {ctx.fillRect(k.startX, k.startY, k.w, k.h);});  // drawing obsticles
@@ -80,15 +82,17 @@ const draw = () => {
         ctx.fillRect(goal.x, goal.y, 20, 20);
         //Draw lines
         //console.log(objetoVencedor)
-        let posInicial = [30, (canvas.height / 2)]
-        ctx.fillStyle = "yellow"
-        ctx.strokeStyle = "yellow"
-        ctx.beginPath()
-        ctx.moveTo(posInicial[0], posInicial[1])
-        for(let i in objetoVencedor.allAcc){
-          ctx.lineTo(objetoVencedor.allAcc[i].x, objetoVencedor.allAcc[i].y)
-        }
-        ctx.stroke()
+
+      if(objetoVencedor=!null){
+          let posInicial = [30, (canvas.height / 2)]
+          ctx.fillStyle = "yellow"
+          ctx.strokeStyle = "yellow"
+          ctx.beginPath()
+          ctx.moveTo(posInicial[0], posInicial[1])
+          for(let i in objetoVencedor.allAcc){
+            ctx.lineTo(objetoVencedor.allAcc[i].x, objetoVencedor.allAcc[i].y)
+          }
+          ctx.stroke()
       }
       generation.forEach( indi => {  // drawing individuals
         indi.drawI();
@@ -148,9 +152,8 @@ const step = () => {
       return;
     }
       //para depois de acertar
-      if(!teste){
       window.requestAnimationFrame(step);
-      }
+      
       draw();
 }
 
