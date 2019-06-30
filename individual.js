@@ -53,14 +53,14 @@ class Individual {
   }
   drawI() {
     this.update();
-    if(teste){
+    
       ctx.beginPath();
       ctx.fillStyle = 'white';
       ctx.globalAlpha = 0.5;
       ctx.arc(this.pos.x, this.pos.y, 7, 0, 2*Math.PI);
       ctx.fill();
       ctx.closePath();
-    }
+    
   }
 }
 
