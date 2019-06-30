@@ -23,9 +23,9 @@ canvas.addEventListener("mousedown", mouseDown);
 canvas.addEventListener("mouseup", mouseUp);
 canvas.addEventListener("mousemove", mouseMove);
 // Cenário Fácil gen : 2
-//obsticleArr.push({startX:500, startY:500, w:500, h:500});
-//obsticleArr.push({startX:500, startY:0, w:500, h:400});
-//obsticleNum+=2;
+obsticleArr.push({startX:500, startY:500, w:500, h:500});
+obsticleArr.push({startX:500, startY:0, w:500, h:400});
+obsticleNum+=2;
 // Cenário Médio gen : 31
 /*obsticleArr.push({startX:500, startY:500, w:30, h:canvas.height});
 obsticleArr.push({startX:600, startY:0, w:30, h:500});
@@ -79,16 +79,13 @@ const draw = () => {
         ctx.fillStyle = 'green';    // drawing goal
         ctx.fillRect(goal.x, goal.y, 20, 20);
         //Draw lines
-        console.log(objetoVencedor)
+        //console.log(objetoVencedor)
         let posInicial = [30, (canvas.height / 2)]
         ctx.fillStyle = "yellow"
         ctx.strokeStyle = "yellow"
         ctx.beginPath()
         ctx.moveTo(posInicial[0], posInicial[1])
         for(let i in objetoVencedor.allAcc){
-          //posInicial[0] = posInicial[0] + objetoVencedor.allAcc[i].x
-          //posInicial[1] = posInicial[1] + objetoVencedor.allAcc[i].y
-          //ctx.lineTo(posInicial[0], posInicial[1])
           ctx.lineTo(objetoVencedor.allAcc[i].x, objetoVencedor.allAcc[i].y)
         }
         ctx.stroke()
