@@ -44,7 +44,7 @@ class Individual {
         time_final = performance.now();
         this.move = false;
         this.alfa = 2; // modifica alfa, e assim aumenta o fitness desse individuo
-        teste = true;
+        teste = true
         if(!objetoVencedor){
           objetoVencedor = this;
         }
@@ -52,15 +52,15 @@ class Individual {
     }
   }
   drawI() {
-    this.update();
-    
+      this.update();
+      
       ctx.beginPath();
       ctx.fillStyle = 'white';
       ctx.globalAlpha = 0.5;
       ctx.arc(this.pos.x, this.pos.y, 7, 0, 2*Math.PI);
       ctx.fill();
       ctx.closePath();
-    
+
   }
 }
 

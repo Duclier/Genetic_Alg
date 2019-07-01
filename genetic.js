@@ -23,19 +23,19 @@ canvas.addEventListener("mousedown", mouseDown);
 canvas.addEventListener("mouseup", mouseUp);
 canvas.addEventListener("mousemove", mouseMove);
 // Cenário Fácil gen : 2
-obsticleArr.push({startX:500, startY:500, w:500, h:500});
-obsticleArr.push({startX:500, startY:0, w:500, h:400});
-obsticleNum+=2;
+// obsticleArr.push({startX:500, startY:500, w:500, h:500});
+// obsticleArr.push({startX:500, startY:0, w:500, h:400});
+// obsticleNum+=2;
 // Cenário Médio gen : 31
-/*obsticleArr.push({startX:500, startY:500, w:30, h:canvas.height});
-obsticleArr.push({startX:600, startY:0, w:30, h:500});
-obsticleNum+= 2;*/
+// obsticleArr.push({startX:500, startY:500, w:30, h:canvas.height});
+// obsticleArr.push({startX:600, startY:0, w:30, h:500});
+// obsticleNum+= 2;
 // Cenário Difícil gen : 44
-/*obsticleArr.push({startX:500, startY:500, w:30, h:canvas.height});
-obsticleArr.push({startX:700, startY:0, w:30, h:500});
-obsticleArr.push({startX:900, startY:300, w:30, h:300});
-obsticleArr.push({startX:1000, startY:300, w:30, h:300});
-obsticleNum+= 4;*/
+// obsticleArr.push({startX:500, startY:500, w:30, h:canvas.height});
+// obsticleArr.push({startX:700, startY:0, w:30, h:500});
+// obsticleArr.push({startX:900, startY:300, w:30, h:300});
+// obsticleArr.push({startX:1000, startY:300, w:30, h:300});
+// obsticleNum+= 4;
 
 
 function mouseDown(e) {
@@ -65,7 +65,6 @@ function mouseMove(e) {
 
 // draw dos elmentos na tela - (obstaculos,objetivo e individuos)
 const draw = () => {
-      
         ctx.globalAlpha = 1;
         ctx.fillStyle = '#211f1f';                         // clear canvas
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -81,9 +80,7 @@ const draw = () => {
         ctx.fillStyle = 'green';    // drawing goal
         ctx.fillRect(goal.x, goal.y, 20, 20);
         //Draw lines
-        //console.log(objetoVencedor)
-
-      if(objetoVencedor=!null){
+       if(objetoVencedor !== null){
           let posInicial = [30, (canvas.height / 2)]
           ctx.fillStyle = "yellow"
           ctx.strokeStyle = "yellow"
@@ -93,7 +90,7 @@ const draw = () => {
             ctx.lineTo(objetoVencedor.allAcc[i].x, objetoVencedor.allAcc[i].y)
           }
           ctx.stroke()
-      }
+       }
       generation.forEach( indi => {  // drawing individuals
         indi.drawI();
       });
@@ -144,6 +141,10 @@ const newGeneration = () => {
 // loop de draw (cria uma nova geração quando a atual acaba)
 //var frameControler = 0;
 const step = () => {
+    if (teste){
+      draw();
+      return;
+    }
     if (++framesDrawn >= dnaLength) {
       framesDrawn = 0;
       newGeneration();
@@ -153,7 +154,7 @@ const step = () => {
     }
       //para depois de acertar
       window.requestAnimationFrame(step);
-      
+
       draw();
 }
 
