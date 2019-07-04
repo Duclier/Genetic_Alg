@@ -83,11 +83,11 @@ const draw = () => {
         ctx.fillRect(goal.x, goal.y, 20, 20);
         //Draw lines
        if(objetoVencedor !== null){
-          let posInicial = [30,(canvas.height/2)];
+          // let posInicial = [30,(canvas.height/2)];
           ctx.fillStyle = "yellow"
           ctx.strokeStyle = "yellow"
           ctx.beginPath()
-          ctx.moveTo(posInicial[0], posInicial[1])
+          ctx.moveTo(pos_inicial[0], pos_inicial[1])
           for(let i in traj_objVencedor){
             ctx.lineTo(traj_objVencedor[i].x, traj_objVencedor[i].y)
           }
