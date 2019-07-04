@@ -12,15 +12,18 @@ var goal = {x:canvas.width-100, y:canvas.height/2};
 const tournamentParcipiants = 10;
 let genNumber = 1;
 var teste = false;
-var objetoVencedor = null
-var pos_inicial = [30,(canvas.height/2)];
-var traj_objVencedor =[];
-
 // obsticle drawing
 let obsticleNum = 0;
 let obsticleArr = [];
 let rect = {};
 let drag = false;
+var objetoVencedor = null
+// Sets pos
+var pos_inicial = [30,(canvas.height/2)];
+loadScenario()
+var pos_inicial_generation = [pos_inicial[0], pos_inicial[1]];
+var traj_objVencedor =[];
+
 canvas.addEventListener("mousedown", mouseDown);
 canvas.addEventListener("mouseup", mouseUp);
 canvas.addEventListener("mousemove", mouseMove);
@@ -38,7 +41,6 @@ canvas.addEventListener("mousemove", mouseMove);
 // obsticleArr.push({startX:900, startY:300, w:30, h:300});
 // obsticleArr.push({startX:1000, startY:300, w:30, h:300});
 // obsticleNum+= 4;
-loadScenario()
 
 function mouseDown(e) {
   rect.startX = e.pageX;
@@ -151,7 +153,6 @@ const bestFit= () => {
       best_fit = generation[i].fitness;
       best_obj = generation[i];
       if(generation[i].problem && generation[i].allAcc.length > 5){
-        console.log(generation[i].allAcc.length)
         obj.x = generation[i].allAcc[generation[i].allAcc.length-5].x;
         obj.y = generation[i].allAcc[generation[i].allAcc.length-5].y;
       }else{
@@ -174,8 +175,8 @@ const bestFit= () => {
   };
   //console.log(traj_objVencedor);
 
-  pos_inicial[0] = obj.x;
-  pos_inicial[1] = obj.y;
+  pos_inicial_generation[0] = obj.x;
+  pos_inicial_generation[1] = obj.y;
   //console.log(pos_inicial[0]);
  // console.log(pos_inicial[1]);
 }

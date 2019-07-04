@@ -1,6 +1,6 @@
 class Individual {
   constructor(DNA) {
-     this.pos = {x:pos_inicial[0], y:pos_inicial[1]}; //posição inicial para todos os individuos
+     this.pos = {x:pos_inicial_generation[0], y:pos_inicial_generation[1]}; //posição inicial para todos os individuos
      this.vel = {x:0, y:0}; // velocidade no qual é movido
      this.acc = DNA; // o cromossomo formado a partir de dnaLength números randomicos
      this.fitness = 0; // fitness do inviduo
